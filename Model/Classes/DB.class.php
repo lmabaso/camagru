@@ -10,6 +10,7 @@ class DB {
     private function __construct() {
         try {
             $this->_pdo = new PDO('mysql:host=' . Config::get('mysql/host') . ';dbname='. Config::get('mysql/db') , Config::get('mysql/username'), Config::get('mysql/password'));
+            $this->_pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
         } catch (PDOException $e) {
             die ($e->getMessage());
         }
@@ -33,7 +34,8 @@ class DB {
                 }
             }
             if ($this->_query->execute()) {
-                $this->_results = $this->_query->fetchAll(PDO::FETCH_OBJ);
+                if (strstr($sql, "SELECT"))
+                    $this->_results = $this->_query->fetchAll(PDO::FETCH_OBJ);
                 $this->_count = $this->_query->rowCount();
             }
             else {
@@ -59,12 +61,53 @@ class DB {
         return (false); 
     }
 
+    public function insert($table, $field = array()) {
+        if (count($field)) {
+            $keys = array_keys($field);
+            $values = '';
+            $x = 1;
+            foreach ($field as $fields) {
+                $values .= "?";
+                if ($x < count($field))
+                    $values .= ", ";
+                $x++;
+            }
+            $sql = "INSERT INTO {$table} (`". implode('`,`', $keys) ."`) VALUES ({$values})";
+            if (!$this->query($sql, $field)->error()) {
+                return (true);
+            }
+        }
+        return (false);
+    }
+
+    public function update($table, $id, $fields) { //double check error on multipule updates
+        $set = '';
+        $x = 1;
+        foreach ($fields as $name => $value) {
+            $set .= "{$name} = ?";
+            if ($x < count($fields))
+            {
+                $set .= ", ";
+            }
+            $x++;
+        }
+        $sql = "UPDATE {$table} SET {$set} WHERE user_id = {$id}";
+        if (!$this->query($sql, $fields)->error()) {
+            return (true);
+        }
+        return (false);
+    }
+
     public function count() {
         return ($this->_count);
     }
 
     public function results() {
         return ($this->_results);
+    }
+
+    public function first() {
+        return ($this->results()[0]);
     }
 
     public function get($table, $where) {
