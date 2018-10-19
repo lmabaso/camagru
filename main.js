@@ -1,33 +1,42 @@
-var x;
-var y;
+var video = document.getElementById('video');
+var canvas = document.getElementById('canvas');
+var ctx = canvas.getContext('2d');
+var vendorUrl = window.URL || window.webkitURL;
 
-var c = document.getElementById("gameSreen");
-var ctx = c.getContext("2d");
+(function() {
+    navigator.getMedia =    navigator.getUserMedia ||
+                            navigator.webkitGetUserMedia ||
+                            navigator.mozGetUserMedia ||
+                            navigator.mediaDevices.getUserMedia;
+    navigator.getMedia({
+        video: true,
+        audio: false
+    }, function(stream) {
+        video.src = vendorUrl.createObjectURL(stream);
+        video.play();
+    }, function (error) {
 
-ctx.strokeStyle="white";
-ctx.lineWidth = 0.01;
-var myWidth = 1350;
-var myHeight = 900;
-var mySizeW = myWidth / 150;
-var mySizeH = myHeight / 100;
+    });
+})();
 
-for (var i = 0; i < myWidth; i+= mySizeW) {
-  ctx.moveTo(i,0);
-  ctx.lineTo(i, myHeight);
-  ctx.stroke();
+function capture() {
+    ctx.drawImage(video, 0, 0, 400, 300);
+    document.getElementById('canvas').style = "display:block";
+    document.getElementById('video').style = "display:none";
+    document.getElementById("capture").style = "display:none";
+    document.getElementById('upload').style = "display:block";
+    document.getElementById('new').style = "display:block";
 }
 
-for (var j = 0; j < myHeight; j+= mySizeH) {
-  ctx.moveTo(0, j);
-  ctx.lineTo(myWidth, j);
-  ctx.stroke();
+function newcap() {
+    document.getElementById('canvas').style = "display:none";
+    document.getElementById('video').style = "display:block";
+    document.getElementById("capture").style = "display:block";
+    document.getElementById("new").style = "display:none";
+    document.getElementById("upload").style = "display:none";
 }
-x = mySizeW;
-y = mySizeH;
 
-ctx.fillStyle = "white";
-ctx.fillRect(x, y,10,10);
-
-function myFunction() {
-    alert("Hello! I am an alert box!");
+function upload() {
+    var new_img = new Image();
+    
 }
