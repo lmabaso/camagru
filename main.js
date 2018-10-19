@@ -38,5 +38,6 @@ function newcap() {
 
 function upload() {
     var new_img = new Image();
-    
+    var dataURL = canvas.toDataURL('image/png');
+    button.href = dataURL;
 }
