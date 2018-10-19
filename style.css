@@ -352,29 +352,24 @@ div.cat-wrapper form select{
     padding: 5px;
     width: 90px;
 }
-/* div.gameSreen {
-  border: 1px solid black;
-  width: 1350px;
-  height: 900px;
-  margin: 100px auto;
-  box-shadow: 0px 0px 10px 2px black;
-  background-image: url('space.jpeg');
-} */
-canvas.aa {
-  border: 1px solid black;
-  width: 1350px;
-  height: 900px;
-  margin: 100px auto;
-  box-shadow: 0px 0px 10px 2px black;
-  background-image: url('space.jpeg');
+
+div.booth {
+    width: 400px;
+    background-color: #ccc;
+    border: 10px solid #ddd;
+    margin: 0 auto;
 }
 
-div.as {
-  margin-left: 300px;
-  margin-right: auto;
+div.booth-button {
+    display: block;
+    margin: 10px 0;
+    padding: 10px 20px;
+    background-color: cyan;
+    color: white;
+    text-align: center;
+    text-decoration: none;
 }
 
-/* color-palette: #8E9AAF #42CAFD #1F363D #40798C #E7E7E7 */
-
-/* TO DO */
-/* add hover to add to cart btn*/
+#canvas {
+    display: none;
+}
