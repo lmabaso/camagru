@@ -14,7 +14,7 @@ class User {
                 if ($this->find($user)) {
                     $this->_isLoggedIn = true;
                 } else {
-                    //loggout
+                    // logout();
                 }
             }
         } else {

@@ -41,6 +41,13 @@
                             $this->addError("{$item} already exists");
                         }
                     }
+                    else if ($rule === 'valid_email')
+                    {
+                        if (!filter_var($source[$rule_value], FILTER_VALIDATE_EMAIL))
+                        {
+                            $this->addError("{$item} is not a valid email");
+                        }
+                    }
                 }
             }
         }

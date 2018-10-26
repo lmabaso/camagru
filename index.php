@@ -1,13 +1,27 @@
 <?php 
+include_once 'header.php';
 
-require_once 'Routes.php';
-require_once 'Control/Core/init.php';
+echo '<section class="main-container">
+        <div class="main-wrapper">
+            <h2>Home</h2>';
 
-function __autoload($class) {
-    if (file_exists('Model/Classes/' . $class . '.class.php')) {
-        require_once 'Model/Classes/' . $class . '.class.php';
-    } else if (file_exists('Control/Classes/' . $class . '.class.php')) {
-        require_once 'Control/Classes/' . $class . '.class.php';
-    }
+if (Session::exists('success'))
+{
+    echo Session::flash('success');
 }
+if (Session::exists('fail'))
+{
+    echo Session::flash('fail');
+}
+if ($user->isLoggedIn())
+{
+    Redirect::to('home.php');
+}
+else
+{
+    echo "<p> Please Login or register to procced";
+}
+echo "</div>
+</section>";
+include_once 'footer.php';
 ?>
