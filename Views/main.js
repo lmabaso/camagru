@@ -36,7 +36,7 @@ function newcap() {
     document.getElementById("upload").style = "display:none";
 }
 
-function upload() {
+function save() {
     var new_img = new Image();
     var dataURL = canvas.toDataURL('image/png');
     button.href = dataURL;

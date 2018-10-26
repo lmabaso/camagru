@@ -1,12 +1,10 @@
 <?php
-require_once 'Control/Core/init.php';
-
 $user = new User();
 echo '<!DOCTYPE html>
 	  <html>
 		<head>
 			<title>Camagru</title>
-			<link rel="stylesheet" type="text/css" href="style.css">
+			<link rel="stylesheet" type="text/css" href="Style/git style.css">
 		</head>
 		<body>
 			<header>
