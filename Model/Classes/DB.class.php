@@ -81,7 +81,7 @@ class DB {
         return (false);
     }
 
-    public function update($table, $id, $fields) { //double check error on multipule updates
+    public function update($table, $id, $fields) {
         $set = '';
         $x = 1;
         foreach ($fields as $name => $value) {

@@ -1,5 +1,5 @@
 <?php
-require_once 'Control/Core/init.php';
+require_once 'config/Core/init.php';
 
 $user = new User();
 echo '<!DOCTYPE html>

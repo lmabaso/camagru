@@ -380,7 +380,7 @@ div.booth-button {
 	height: 300px;
     width: 400px;
     background-image: url('');
-    background-size: 60%;
+    /* background-size: 60%; */
     background-repeat: no-repeat;
     background-position-x: 50%;
     background-position-y: 20%;

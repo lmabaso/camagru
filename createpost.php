@@ -28,8 +28,12 @@ if (Input::exists())
 
             $dest = imagecreatefrompng($name);
             $src = imagecreatefrompng($filter);
-            imagecopymerge($dest, $src, 200, 20, 0, 0, 150, 150, 100);
+            imagecopymerge($dest, $src, 150, 20, 0, 0, 150, 150, 100);
             imagepng($dest, $name);
+            imagedestroy($dest);
+            imagedestroy($src);
+
+
             $pic = new Photo();
 
             $pic->upload(array(
@@ -61,11 +65,11 @@ if (Input::exists())
             </div>
             <div style="display:flex">
                 <select name="filter" id ="filter">
-                    <option value=""></option>
+                    <option value="">Select</option>
                     <option value="imgs/overlay/Glasses.png">Glasses</option>
                     <option value="imgs/overlay/headgear.png">headgear</option>
-                    <option value="imgs/overlay/">3</option>
-                    <option value="">4</option>
+                    <option value="imgs/overlay/dogface.png">3</option>
+                    <option value="imgs/overlay/sponge.png">4</option>
                 </select>
                 <button onclick="superimpose()">Apply Effect</button>
             </div>
