@@ -105,7 +105,6 @@ try
 	$_db->query($sql, array());
 	echo "Table comments create success --- ";
 }
-
 catch (PDOException $e)
 {
 	echo $e->getMessage();
