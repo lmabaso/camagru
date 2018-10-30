@@ -69,7 +69,7 @@ if (Input::exists())
                     <option value="imgs/overlay/Glasses.png">Glasses</option>
                     <option value="imgs/overlay/headgear.png">headgear</option>
                     <option value="imgs/overlay/dogface.png">3</option>
-                    <option value="imgs/overlay/sponge.png">4</option>
+                    <option value="imgs/overlay/clipart.png">4</option>
                 </select>
                 <button onclick="superimpose()">Apply Effect</button>
             </div>
