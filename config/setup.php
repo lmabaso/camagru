@@ -48,7 +48,8 @@ try
 		user_email varchar(256) null,
 		user_pwd varchar(256) null,
 		token varchar(256) null,
-		user_isvalidated boolean not null DEFAULT '0'
+		user_isvalidated boolean not null DEFAULT '0',
+		user_notification boolean not null DEFAULT '1'
 		);";
 	$_db->query($sql, array());
 	echo "Table users create success --- ";
@@ -105,6 +106,7 @@ try
 	$_db->query($sql, array());
 	echo "Table comments create success --- ";
 }
+
 catch (PDOException $e)
 {
 	echo $e->getMessage();

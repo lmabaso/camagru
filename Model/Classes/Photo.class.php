@@ -14,6 +14,12 @@ class Photo {
         }
     }
 
+    public function delete($fields = array()) {
+        if (!$this->_db->query('DELETE FROM pictures WHERE id=?', $fields)) {
+            throw new Exception('There was a problem creating new account');
+        }
+    }
+
     public function find($user = null) {
         if ($user) {
             $field = (is_numeric($user)) ? 'user_id' : 'user_username';

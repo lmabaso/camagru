@@ -39,13 +39,12 @@ if (Input::exists())
                 {
                     Session::flash('fail', 'You have unsuccessfully updated your password.');
                 }
-                Redirect::to('index.php');
             }
             catch(Exception $e)
             {
                 die($e->getMessage());
             }
-			Redirect::to('index.php');
+			Redirect::to('profile.php');
         }
         else
         {
@@ -62,9 +61,8 @@ if (Input::exists())
         <h2>Change Password</p>
         <form class="signup-form" action="" method="POST">
             <input type="password" name="old_pwd" placeholder="current password" autocomplete="off">
-            <input type="password" name="new_pwd" placeholder="new password" autocomplete="off">
+            <input type="password" name="new_pwd" placeholder="new password" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" title="Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters" autocomplete="off">
 			<input type="password" name="pwd_again" placeholder="new password again" autocomplete="off">
-            <!-- <input type="password" name="pwd" placeholder="password" autocomplete="off"> -->
             <input type="hidden" name="token" value="<?php echo Token::generate(); ?> " >
             <button type="submit" name="update">Update</button>
         </form>

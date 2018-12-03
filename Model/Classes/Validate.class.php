@@ -22,6 +22,13 @@
                             $this->addError("{$item} must be a minimum of {$rule_value} charectors");
                         }
                     }
+                    else if ($rule === 'invalid')
+                    {
+                        if (preg_match('/\<script(.*?)?\>(.|\\n)*?\<\/script\>/i', $source[$rule_value]))
+                        {
+                            $this->addError("{$item} is not a valid input");
+                        }
+                    }
                     else if ($rule === 'max')
                     {
                         if (strlen($value) > $rule_value) {

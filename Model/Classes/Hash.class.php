@@ -7,7 +7,6 @@ class Hash {
     }
 
     public static function salt($legnth) {
-        // return (mcrypt_create_iv($legnth));
         $str = "qwertyuiopasdfghjklzxcvbnm1234567890QWERTYUIOPASDFGHJKLZXCVBNM ";
 		$str = str_shuffle($str);
 		$str = substr($str, 0, $legnth);

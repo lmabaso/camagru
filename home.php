@@ -15,6 +15,19 @@ if (Input::exists())
             try
             {
                 $stuff->insert('likes', array('user_id' => $user->data()->user_id,'pic_id' => Input::get('pic_id')));
+                // $res1 = $stuff->query('SELECT * FROM pictures WHERE id=?', array(Input::get('pic_id')));
+                $res = $stuff->get('pictures', array('id', '=', Input::get('pic_id')));
+                $rs = $stuff->get('users', array('user_id', '=', $res->results()[0]->user_id));
+                $message = 
+                "
+                Hi ". $rs->results()[0]->user_name ."
+
+                ". (($user->data()->user_name == $rs->results()[0]->user_name) ? "You" : $user->data()->user_username ) ." liked your picture
+                http://localhost:8080/camagru/";
+                if ($rs->results()[0]->user_notification == 1)
+                {
+                    mail($rs->results()[0]->user_email, "Camagru like Notification", $message,  "Camagru");
+                }
             }
             catch (Exception $e)
             {
@@ -26,7 +39,7 @@ if (Input::exists())
         {
             try
             {
-                $stuff->query('DELETE FROM likes  WHERE user_id=? AND pic_id=?', array($user->data()->user_id, Input::get('pic_id')));
+                $stuff->query('DELETE FROM likes  WHERE user_id=? AND pic_id=?', array($user->data()->user_id, Input::get('pic_id')));   
             }
             catch (Exception $e)
             {
@@ -44,6 +57,18 @@ if (Input::exists())
             try
             {
                 $stuff->insert('comments', array('user_id' => $user->data()->user_id, 'pic_id' => Input::get('pic_id'), 'comment' => Input::get('commenta')));
+                $res = $stuff->get('pictures', array('id', '=', Input::get('pic_id')));
+                $rs = $stuff->get('users', array('user_id', '=', $res->results()[0]->user_id));
+                $message = 
+                "
+                Hi " . $rs->results()[0]->user_name . "
+
+                " . (($user->data()->user_name == $rs->results()[0]->user_name) ? "You" : $user->data()->user_username ) . " comented on your picture
+                http://localhost:8080/camagru/";
+                if ($rs->results()[0]->user_notification == 1)
+                {
+                    mail($rs->results()[0]->user_email, "Camagru comment Notification", $message, "Camagru");
+                }
             }
             catch (Exception $e)
             {
@@ -63,7 +88,7 @@ if (Input::exists())
 
 <section class="main-container">
 	<div class="main-wrapper">
-        <h2>Home</p>       
+        <h2>Gallery</h2>       
     </div>
     <a href='createpost.php'>create post</a><br />
 <?php
@@ -83,7 +108,7 @@ else
     $page = Input::get('page');
 }
 $start_limit = ($page - 1) * $limit;
-$res = $stuff->query('SELECT * FROM pictures LIMIT '. $start_limit . ',' . $limit);
+$res = $stuff->query('SELECT * FROM pictures ORDER BY id DESC LIMIT '. $start_limit . ',' . $limit);
 foreach ($res->results() as $pic)
 {
     echo '<div class="booth">';

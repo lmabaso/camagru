@@ -14,7 +14,7 @@ class User {
                 if ($this->find($user)) {
                     $this->_isLoggedIn = true;
                 } else {
-                    // logout();
+                    $this->_isLoggedIn = false;
                 }
             }
         } else {
@@ -41,8 +41,7 @@ class User {
     public function find($user = null) {
         if ($user) {
             $field = (is_numeric($user)) ? 'user_id' : 'user_username';
-            $data = $this->_db->get('users', array($field, '=', $user));
-
+            $data = $this->_db->query('SELECT * FROM users WHERE '. $field . '= ? OR user_email = ?', array($user, $user));
             if ($data->count()) {
                 $this->_data = $data->first();    
                 return (true);
@@ -54,7 +53,7 @@ class User {
     public function login($username = null, $password = null) {
         $user = $this->find($username);
         if ($user) {
-            if ($this->data()->user_pwd === Hash::make($password, $this->data()->user_salt)) {
+            if ($this->data()->user_isvalidated == 1 && $this->data()->user_pwd === Hash::make($password, $this->data()->user_salt)) {
                 Session::put($this->_sessionName, $this->data()->user_id);
                 return (true);
             }
