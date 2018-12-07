@@ -42,7 +42,7 @@
                         }
                     }
                     else if ($rule === 'unique')
-                    { 
+                    {
                         $check = $this->_db->get($rule_value, array("user_" . $item, '=', $value));
                         if ($check->count()) {
                             $this->addError("{$item} already exists");

@@ -72,7 +72,7 @@ if (Input::exists())
             </div>
             <div style="display:flex">
                 <select name="filter" id ="filter">
-                    <option value="imgs/overlay/clear,png">Select</option>
+                    <option value="imgs/overlay/clear.png">Select</option>
                     <option value="imgs/overlay/Glasses.png">Glasses</option>
                     <option value="imgs/overlay/headgear.png">headgear</option>
                     <option value="imgs/overlay/dogface.png">Dog ears</option>
@@ -89,7 +89,7 @@ if (Input::exists())
         </div>
     </div>
     <div style="margin-top: 30px">
-        
+
         <?php
             $stuff = DB::getInstance();
             $res = $stuff->query('SELECT * FROM pictures WHERE user_id=? ORDER BY id DESC ', array($user->data()->user_id));

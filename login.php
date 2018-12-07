@@ -6,7 +6,7 @@ if (Input::exists())
 	if (Token::check(Input::get('token')))
 	{
 		$validate = new Validate();
-		$validation = $validate->check($_POST, array('username' => array('required' => true, 'invalid' => 'usersname'), 'pwd' => array('required' => true)));
+		$validation = $validate->check($_POST, array('username' => array('required' => true, 'invalid' => 'username'), 'pwd' => array('required' => true)));
 		if ($validation->passed())
 		{
 			$user = new User();
